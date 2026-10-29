@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/mock/mock-api.js"></script>
+  <script src="/mock/demo.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SB Dash (demo)</title>
+  <link rel="icon" type="image/png" href="/logo.png">
+  
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="sb-dash">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="theme-color" content="#1A1A1F">
+  
+  <script>try{var r=document.documentElement,m=JSON.parse(localStorage.getItem('sbLabThemeMode')||'null')||(localStorage.getItem('sbLabTheme')==='light'?'light':'dark'),b=m==='system'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):m;if(b==='light')r.setAttribute('data-theme','light');var v=JSON.parse(localStorage.getItem('hq:themeVars')||'null');if(v&&v[b])for(var k in v[b])r.style.setProperty(k,v[b][k])}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/filo-loader.css">
+  <link rel="stylesheet" href="/logos/batch-grid.css">
+  <link rel="stylesheet" href="/brand-guide.css">
+  <link rel="stylesheet" href="/daily-deck.css">
+  <link rel="stylesheet" href="/newsletter-perf.css">
+  <link rel="stylesheet" href="/share-funnel.css">
+  
+  <link rel="stylesheet" href="/lead-flow.css">
+  <link rel="stylesheet" href="/lapsed.css">
+  <link rel="stylesheet" href="/revenue-ladder.css">
+  <link rel="stylesheet" href="/next-moves.css">
+  <link rel="stylesheet" href="/hq-shell.css">
+  <link rel="stylesheet" href="/revenue-calc.css">
+  <link rel="stylesheet" href="/delivery.css">
+  <link rel="stylesheet" href="/inventory.css">
+  <link rel="stylesheet" href="/scribbles.css">
+  <link rel="stylesheet" href="/daily-recipe.css">
+  <link rel="stylesheet" href="/prospect-orbit.css">
+  <link rel="stylesheet" href="/radar.css">
+  <link rel="stylesheet" href="/mock/demo.css">
+  <link rel="stylesheet" href="/mock/editors-desk.css">
+</head>
+<body>
+  
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="/logo.png" alt="sb-dash" class="sidebar-logo">
+      <span class="sidebar-title">sb-dash</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      
+      <button class="nav-item" data-tab="home">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 7l6-4.5L14 7v6.5a.5.5 0 0 1-.5.5H10V10H6v4H2.5a.5.5 0 0 1-.5-.5V7z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Home
+      </button>
+
+      <div class="nav-section">Revenue</div>
+      <button class="nav-item" data-tab="nextmoves" title="Every open sales move ranked by the dollars acting on it today is expected to move, with the reason on each">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3.5h6M3 8h8M3 12.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.5 10.5l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Next Best Move
+      </button>
+      <button class="nav-item" data-tab="pipeline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12M3 3v3l3 3v4l4 1V9l3-3V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sponsorship Pipeline
+      </button>
+      <button class="nav-item" data-tab="orbit" title="Every company the prospecting machine has touched, as a river from lead source to live Attio deal">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="1.1" fill="currentColor"/><circle cx="12.4" cy="3.6" r="1.3" fill="currentColor"/></svg>
+        Lead Stream
+      </button>
+      <button class="nav-item" data-tab="bookings" title="Signed work with dates in the diary: what we have sold and when it runs">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5.5 10.2l1.7 1.6 3.3-3.3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sold &amp; Scheduled
+      </button>
+      <button class="nav-item" data-tab="revmodel">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h10M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="4" r="1.6" fill="currentColor"/><circle cx="10" cy="8" r="1.6" fill="currentColor"/><circle cx="5" cy="12" r="1.6" fill="currentColor"/></svg>
+        Revenue Calculator
+      </button>
+      <div class="nav-section">Delivery</div>
+      <button class="nav-item" data-tab="delivery">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6h12M5 2v2M11 2v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5.5 10l1.7 1.6L10.5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Delivery
+      </button>
+      <button class="nav-item" data-tab="filo">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="4" width="10" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M8 4V2M5.5 7v1.5M10.5 7v1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 9h1M13 9h1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Filo Sandbox
+        <span class="draft-count-badge" id="filoBlockedBadge"></span>
+      </button>
+      <div class="nav-section">Daily Newsletter</div>
+      <button class="nav-item" data-tab="dailies" title="What the daily run is feeding us: sources, topics and approval rates">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.2" stroke="currentColor" stroke-width="1.5"/><path d="M10.2 10.2L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Research
+      </button>
+      <button class="nav-item" data-tab="dailyrecipe" title="The knobs that steer which stories the pulse brings in, and how each kind of story does">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5" cy="5" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M5 5l1.2-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="11" cy="11" r="2.6" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l-1.4-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M9.5 3.5H14M2 12.5h4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Recipe
+      </button>
+      <button class="nav-item" data-tab="dailykanban" title="Every Daily in progress, by stage">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2.5" width="3.4" height="11" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="6.3" y="2.5" width="3.4" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="10.6" y="2.5" width="3.4" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
+        Kanban
+      </button>
+      <button class="nav-item" data-tab="dailyeditor" title="Edit the Dailies full screen">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="4.5" y="2" width="9" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 4.5v7.5a2 2 0 0 0 2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Editor
+        <span class="draft-count-badge" id="ddLaunchCount"></span>
+      </button>
+      <button class="nav-item" data-tab="dailypublishing" title="The send calendar: slot Dailies into send days">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Publishing
+      </button>
+      <button class="nav-item" data-tab="brandmockups" title="The Daily name contenders with the new mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="9.5" r="1.4" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="9.5" r="1.4" stroke="currentColor" stroke-width="1.3"/></svg>
+        Final Mockups
+      </button>
+      <div class="nav-section">Audience</div>
+      <button class="nav-item" data-tab="newsletter" title="Every beehiiv send, weekly and Daily: clicks, ads, unsubscribes, replies">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 4.5l5.5 4 5.5-4" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Newsletter Performance
+      </button>
+      <button class="nav-item" data-tab="audience">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6" cy="5" r="2.2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 13c0-2 1.6-3.3 3.5-3.3S9.5 11 9.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M10.5 4.2A2 2 0 0 1 11 8m1 4.8c0-1.4-.5-2.5-1.5-3.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Audience Growth
+      </button>
+      <button class="nav-item" data-tab="sharefunnel" title="How readers move through the Daily share page, and the signups their shares bring in">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12l-4.5 5v4.5l-3 1.5V8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        Share Funnel
+      </button>
+      <button class="nav-item" data-tab="social">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 11.5l3.4-3.4 2.2 2.2L14 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="4.5" r="1.3" fill="currentColor"/></svg>
+        Social Performance
+      </button>
+      <div class="sidebar-divider"></div>
+      <button class="nav-item" data-tab="shipping">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 13V9M8 13V4M13 13V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Shipping Leaderboard
+      </button>
+      <button class="nav-item" data-tab="scribbles" title="Read the team's sb-scribbles from Notion">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2.5h7.5L13 5v8.5H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M5.5 7.5h5M5.5 10h3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        SB Scribbles
+      </button>
+      <div class="nav-section">Skills &amp; System</div>
+      <button class="nav-item" data-tab="radar" title="What business and startup land is actually engaging with right now, ranked by real upvotes and comments - fuel for /hook and /social. Rebuilt daily, free sources, zero tokens">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 8l4.2-4.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="8" r="1" fill="currentColor"/></svg>
+        Radar
+      </button>
+      <button class="nav-item" data-tab="skills">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Skills
+      </button>
+      <button class="nav-item" data-tab="logos" title="Colours, fonts, logos, GIFs, covers and logo animations">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="5.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="10.5" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="10.5" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        Brand Guide
+      </button>
+    </nav>
+
+    <div class="sidebar-resize" id="sidebarResize" title="Drag to resize"></div>
+    <div class="sidebar-footer">
+      <div class="theme-switch" id="themeSwitch" role="group" aria-label="Theme">
+        <button class="theme-switch-btn" id="themeBtnLight" aria-pressed="false" aria-label="Light mode" title="Light mode">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1.06 1.06M11.54 11.54l1.06 1.06M3.4 12.6l1.06-1.06M11.54 4.46l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="theme-switch-btn" id="themeBtnDark" aria-pressed="true" aria-label="Dark mode" title="Dark mode">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 9.6A5.5 5.5 0 0 1 6.4 2.5a5.5 5.5 0 1 0 7.1 7.1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <span class="connection-status" id="connectionStatus">connecting...</span>
+      <a class="signout-link" href="/logout">Sign out</a>
+    </div>
+  </aside>
+
+  
+  <main class="main-content">
+    
+    <section class="tab-panel" id="panel-skills">
+      <div class="panel-header">
+        <h2>Skills</h2>
+        <p class="section-hint" id="skillsHint">Every skill in the sb-lab repo, so you can see what Claude can already do before asking for something new.</p>
+      </div>
+      
+      <div class="skills-toolbar">
+        <div class="hq-seg skills-views" role="tablist" aria-label="Skills views">
+          <button type="button" data-skview="all" class="on" aria-selected="true">All skills</button>
+          <button type="button" data-skview="people" aria-selected="false">By person</button>
+        </div>
+        <input type="text" class="skills-search" id="skillsSearch" placeholder="Search by task, e.g. move an ad to next week…">
+        <span class="skills-count" id="skillCount"></span>
+      </div>
+      <div id="skillsView"></div>
+      <div id="spWrap" hidden>
+        <p class="section-hint" id="spSub">Who built each skill and who keeps working on it, from git history.</p>
+        <div id="spContainer"><sb-loading>Loading who edits which skills&hellip;</sb-loading></div>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-repo"><div id="contextContainer" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-suggestions"><div id="suggestionsContainer" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-pipeline">
+      <div class="panel-header">
+        <h2>Sponsorship Pipeline <span class="count" id="pipeCount"></span></h2>
+        <p class="section-hint" id="pipeSub">Loading&hellip;</p>
+      </div>
+      <div class="pipe-cards" id="pipeCards"><sb-loading until="pipeSub">Loading the open deals from Attio&hellip;</sb-loading></div>
+      <div id="gbPanel"></div>
+      <div class="pipe-charts" id="pipeCharts"></div>
+      <section class="mv-block" id="mvBlock">
+        <div class="pipe-board-head">
+          <h3 class="collapse-head" role="button" tabindex="0" aria-expanded="true" data-collapse="mvBlock"><span class="collapse-caret" aria-hidden="true"></span>Movement <span class="count" id="mvCount"></span></h3>
+          <p class="section-hint" id="mvSub"></p>
+        </div>
+        <div class="mv-list" id="mvList"></div>
+      </section>
+
+      <section class="ren-block" id="renBlock" hidden>
+        <div class="pipe-board-head">
+          <h3 class="collapse-head" role="button" tabindex="0" aria-expanded="true" data-collapse="renBlock"><span class="collapse-caret" aria-hidden="true"></span>Renewals to start <span class="count" id="renCount"></span></h3>
+          <p class="section-hint" id="renSub"></p>
+        </div>
+        <div class="ren-list" id="renList"></div>
+      </section>
+
+      <div class="pipe-board-head">
+        <h3>Deal board</h3>
+        <p class="section-hint">Every open deal, flowing left to right toward the win. Click a card to open it in Attio.</p>
+      </div>
+      <div class="pipe-board" id="pipeBoard"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-fulfilment">
+      <div class="panel-header">
+        <h2>Campaign Tracker</h2>
+        <p class="section-hint">Where every live campaign is up to, and what is still owed. Deliverables run left to right toward delivery. Pulled live from the Notion Deliverables database, so it is current whenever you open it.</p>
+      </div>
+      <div class="pulse-bar">
+        <span class="pulse-meta" id="pulseMeta">Loading&hellip;</span>
+        <button class="pulse-copy" id="pulseRefreshBtn" type="button">Refresh</button>
+      </div>
+      <div class="pulse-legend">
+        <span><i class="pulse-sw done"></i>Delivered</span>
+        <span><i class="pulse-sw active"></i>In progress / next</span>
+        <span><i class="pulse-sw todo"></i>Still to deliver</span>
+      </div>
+      <div id="pulseContainer"><sb-loading>Loading the live campaigns from Notion&hellip;</sb-loading></div>
+</section>
+
+    
+    
+    <section class="tab-panel" id="panel-social">
+      <div class="panel-header">
+        <h2>Social Performance</h2>
+        <p class="section-hint">Tom's organic posts on LinkedIn + X - reach, engagement, and what's working. From Eden every day, plus the hand-measured numbers in the Notion Social Performance Tracker.</p>
+      </div>
+      <iframe id="socialFrame" title="Social Performance" scrolling="no" style="width:100%;border:0;display:block;background:transparent;min-height:420px"></iframe>
+    </section>
+
+    <section class="tab-panel active" id="panel-home">
+      <div class="panel-header">
+        <h2>Home</h2>
+      </div>
+      <div class="home-grid" id="homeGrid"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-big3"><div id="big3Sub" hidden></div><div id="big3Refresh" hidden></div><div id="big3Grid" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-shipping">
+      <div class="panel-header">
+        <h2>Shipping Leaderboard <span class="count" id="shipCount"></span></h2>
+        <p class="section-hint" id="shipSub">Who is shipping changes to the sb-lab repo, and how much. Every commit that reaches main counts, whoever or whatever wrote it.</p>
+      </div>
+      <div class="pipe-cards" id="shipCards"></div>
+      <div class="pipe-charts" id="shipCharts"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-delivery">
+      <div id="dvRoot"><div class="panel-header"><h2>Delivery</h2><p class="section-hint">Reading the sends and deliverables from Notion&hellip;</p></div></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-inventory"><div id="invRoot" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-revmodel">
+      <div class="panel-header">
+        <h2>Revenue Calculator</h2>
+        <p class="section-hint">Pick a scenario, then move anything. The answer at the top is 1 month of sponsorship revenue.</p>
+      </div>
+      <div id="rmRoot"><p class="section-hint">Reading the last 3 months from Notion&hellip;</p></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-bookings">
+      <div class="panel-header">
+        <h2>Sold &amp; Scheduled <span class="count" id="bookCount"></span></h2>
+        <p class="section-hint">Money already <b>booked and confirmed</b> - signed work with dates in the diary. Not proposals, not pipeline, not leads. Read from the Notion Money-Mirror and Deliverables databases, not Attio, so nothing here is a forecast of what might close.</p>
+        <p class="section-hint" id="bookSub">Loading&hellip;</p>
+      </div>
+      <div class="pipe-cards" id="bookCards"><sb-loading until="bookSub">Loading signed work from the Notion Money-Mirror and Deliverables databases&hellip;</sb-loading></div>
+      <div class="pipe-charts" id="bookCharts"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-dailies">
+      <div class="panel-header">
+        <h2>Research <span class="count" id="dtCount"></span></h2>
+        <p class="section-hint" id="dtSub">Loading&hellip;</p>
+      </div>
+      <div class="dt-toolbar">
+        <div class="dt-period" id="dtPeriod">
+          <button class="period-pill active" data-p="all">Lifetime</button>
+          <button class="period-pill" data-p="30">Last 30 days</button>
+        </div>
+        <button class="drafts-refresh-btn" id="dtRefresh" title="Re-read every Daily row from Notion"><span class="refresh-label">Refresh from Notion</span></button>
+      </div>
+      <div class="pipe-cards" id="dtKpis"><sb-loading until="dtSub">Loading every Daily from Notion&hellip;</sb-loading></div>
+      
+      <div class="dt-grid">
+        <div class="sub-block dt-intake" id="dtIntake"></div>
+        <div class="sub-block dt-sources" id="dtSources"></div>
+        <div class="sub-block dt-topics" id="dtTopics"></div>
+      </div>
+      <div class="sub-block dt-due" id="dtDue"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-dailyrecipe">
+      <div class="panel-header">
+        <h2>Recipe <span class="count" id="drCount"></span></h2>
+        <p class="section-hint" id="drSub">Loading&hellip;</p>
+        <button class="drafts-refresh-btn" id="drRefresh" title="Re-read every Daily from Notion and the recipe from GitHub"><span class="refresh-label">Refresh</span></button>
+      </div>
+      <div id="drRoot"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-dailykanban">
+      <div class="panel-header">
+        <h2>Kanban</h2>
+        <p class="section-hint">Every Daily by stage. Drag a card to change its stage (Archive asks why). Slot a Daily into a day on <b>Publishing</b>, then click <b>Migrate</b> on its card here to build the beehiiv draft. Nothing is ever scheduled. <span id="dbKanbanNote"></span></p>
+        <button class="drafts-refresh-btn" id="dbKanbanRefresh"><span class="refresh-label">Refresh from Notion</span></button>
+      </div>
+      <div class="db-kanban" id="dbKanban"></div>
+    </section>
+    <section class="tab-panel" id="panel-dailypublishing">
+      <div class="panel-header">
+        <div class="db-pub-head">
+          <div><h2>Publishing</h2>
+          <p class="section-hint">1. Drag a Daily onto a send day. 2. Click Migrate to build its beehiiv draft with that day's ads. Nothing is ever scheduled.</p></div>
+          <div class="db-pub-tools"><div id="dbPubBeacon"></div>
+          <button class="drafts-refresh-btn" id="dbPubRefresh"><span class="refresh-label">Refresh from Notion</span></button></div>
+        </div>
+      </div>
+      <div class="dd-cal-body db-pub" id="dbPublishing"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-contentcal">
+      <div class="panel-header">
+        <h2>Content Calendar <span class="count" id="ccalCount"></span></h2>
+        <p class="section-hint" id="ccalSub">Loading&hellip;</p>
+      </div>
+      <div class="cc-legend" id="ccalLegend">
+        <span><i class="cc-dot green"></i>Sent, or every send-gate + progress item met</span>
+        <span><i class="cc-dot yellow"></i>Gate clear so far, still building</span>
+        <span><i class="cc-dot red"></i>A send-gate must-have is failing</span>
+        <span class="cc-legend-hint">Click a day to see every checkpoint. Scroll the grid to change months.</span>
+      </div>
+      <div class="cc-month-bar">
+        <div class="cc-month-nav">
+          <button class="cc-month-btn" id="ccalPrevBtn" title="Previous month">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <h3 class="cc-month-label" id="ccalMonthLabel"></h3>
+          <button class="cc-month-btn" id="ccalNextBtn" title="Next month">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <button class="cc-month-today" id="ccalTodayBtn">Today</button>
+      </div>
+      <div class="cc-month-dow" id="ccalDow"></div>
+      <div class="cc-grid" id="ccalGrid"><sb-loading until="ccalSub">Loading the editions and their send-gate checks&hellip;</sb-loading></div>
+      <div class="idea-modal-overlay" id="ccalModalOverlay" onclick="closeCcalModal()"></div>
+      <div class="idea-modal cc-modal" id="ccalModal">
+        <div class="idea-modal-header">
+          <div class="win-dots"><i></i><i></i><i></i></div>
+          <div>
+            <h3 id="ccalModalTitle"></h3>
+            <p class="cc-modal-subtitle" id="ccalModalSubtitle"></p>
+          </div>
+          <button class="idea-modal-close" onclick="closeCcalModal()">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="idea-modal-body" id="ccalModalBody"></div>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-calendar">
+      <div class="panel-header">
+        <h2>Deliverables Calendar <span class="count" id="calCount"></span></h2>
+        <p class="section-hint" id="calSub">Loading&hellip;</p>
+      </div>
+      <div class="cal-cards" id="calCards"><sb-loading until="calSub">Loading the deliverables from Notion&hellip;</sb-loading></div>
+      <div class="cal-legend" id="calLegend"></div>
+      <div class="cal-agenda" id="calAgenda"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-scribbles"><div id="scRoot"></div></section>
+
+    
+    <section class="tab-panel" id="panel-orbit"><div id="poRoot"></div></section>
+
+    
+    <section class="tab-panel" id="panel-radar"><div id="radarRoot"></div></section>
+
+    
+    <section class="tab-panel" id="panel-contentkitchen"><div id="ckRoot" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-stories"><div id="csTabRoot" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-learn"><div id="learnRoot" hidden></div></section>
+
+    
+    <section class="tab-panel" id="panel-newsletter"><div id="nlRoot"></div></section>
+
+    
+    
+    <section class="tab-panel" id="panel-nextmoves">
+      
+      <div class="hq-seg nm-views" role="tablist" aria-label="Next Best Move views">
+        <button type="button" data-nmview="moves" class="on" aria-selected="true">Moves</button>
+        <button type="button" data-nmview="ladder" aria-selected="false">Revenue Ladder</button>
+      </div>
+      <div id="nmRoot"></div>
+      <div id="rlRoot" hidden></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-sharefunnel"><div id="sfRoot"></div></section>
+
+    
+    <section class="tab-panel" id="panel-audience">
+      <div class="panel-header">
+        <h2>Audience Growth <span class="count" id="subCount"></span></h2>
+        <p class="section-hint" id="subSub">Loading&hellip;</p>
+      </div>
+      <div class="sub-cards" id="subCards"><sb-loading until="subSub">Loading subscribers and sends from beehiiv&hellip;</sb-loading></div>
+      <div class="sub-block">
+        <div class="sub-switch" id="subSwitch"></div>
+        <p class="sub-note" id="subNote"></p>
+        <svg id="subChart" class="sub-chart" viewBox="0 0 1120 380" role="img"></svg>
+      </div>
+      <div class="sub-block">
+        <h3 class="sub-h">Recent sends</h3>
+        <p class="sub-note">Open &amp; click rate per edition — your engagement health.</p>
+        <table class="sub-tbl" id="subSends"><thead><tr>
+          <th>Sent</th><th>Edition</th><th>Recipients</th><th>Open rate</th><th>Click rate</th></tr></thead><tbody></tbody></table>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-funnel"><div id="funnelPeriodPills" hidden></div><div id="funnelMeta" hidden></div><div id="funnelRefreshBtn" hidden></div><div id="funnelContainer" hidden></div></section>
+
+    
+    <section class="tab-panel lg" id="panel-logos">
+      <div class="panel-header">
+        <h2>Brand Guide</h2>
+        <p class="section-hint">Colours, fonts, logos and brand files for Strategy Breakdowns, the Daily and quicker.chat. Carried over from the original Notion brand guide; the logos and animations are built in design/logo-lab.</p>
+      </div>
+      <p class="lg-brandline">Strategy Breakdowns is a weekly 3-minute email on the playbooks and growth hacks behind successful software, internet, or media companies.</p>
+      <div class="lg-sec"><h3>Colour palette</h3><p>From the brand guide, and the same values render-kit uses. <span class="lg-toast" id="bgPalT"></span></p></div>
+      <div id="bgPalette"></div>
+      <div class="lg-sec"><h3>Typography</h3><p>New Order for headings, Avenir Next for body.</p></div>
+      <div id="bgType"></div>
+      <div class="lg-sec"><h3>Logos</h3><p>Click any file to download it. Copy SVG puts the mark on your clipboard for Figma, Notion or code. <a href="https://demo.invalid/" target="_blank" rel="noopener">Drive folder</a></p></div>
+      <div class="lg-marks" id="lgMarks"><sb-loading>Loading the logos&hellip;</sb-loading></div>
+      <div class="lg-sec"><h3>Strategy Screenshots email header</h3><p>A remix of the Strategy Breakdowns header GIF: same intro, then the folder drops and a screenshot drag draws the new logo, the name writes on, and it snaps off. 1500 &times; 1080 like the original, plus 750 for email.</p></div>
+      <div id="bgHeaderFinal"></div>
+      <div class="lg-sec"><h3>Other header takes</h3><p>The crop-corner explorations it was chosen from.</p></div>
+      <div class="lg-media-grid" id="bgHeaders"></div>
+      <div class="lg-sec"><h3>GIFs</h3><p>Gmail avatar, email header and section dividers. <a href="https://demo.invalid/" target="_blank" rel="noopener">Drive folder (with MP4s)</a></p></div>
+      <div class="lg-media-grid" id="bgGifs"></div>
+      <div class="lg-sec"><h3>Covers, social image and Zoom background</h3><p><a href="https://demo.invalid/" target="_blank" rel="noopener">Covers folder</a> · <a href="https://demo.invalid/" target="_blank" rel="noopener">Social share folder</a></p></div>
+      <div class="lg-media-grid" id="bgCovers"></div>
+      <div class="lg-sec"><h3>Logo animations</h3><p>Jump between the 4 batches with the buttons on top. Click a tile to restart it.</p></div>
+      <div class="lg-bar">
+        <button class="drafts-refresh-btn" id="lgPlay" aria-pressed="true">Playing</button>
+        <button class="drafts-refresh-btn" id="lgRestart">Restart all</button>
+        <span class="lbl">Speed</span><div class="lg-seg" id="lgSpeed"><button data-s="0.5" aria-pressed="false">0.5&times;</button><button data-s="1" aria-pressed="true">1&times;</button></div>
+        <span class="lbl">Tile</span><div class="lg-seg" id="lgBgs"><button data-bg="lg-bg-white" aria-pressed="true">White</button><button data-bg="lg-bg-cream" aria-pressed="false">Cream</button><button data-bg="lg-bg-dark" aria-pressed="false">Dark</button></div>
+      </div>
+      <div id="lgBoard"></div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-brandexploration"><div id="bxRoot" hidden></div></section>
+
+    
+    <section class="tab-panel lg" id="panel-brandmockups">
+      <div class="panel-header">
+        <h2>Final Mockups</h2>
+        <p class="section-hint">The Daily #81 mark with each name contender, on the SB wordmark grid: lockup, email header, phone inbox, X profile and browser tab.</p>
+      </div>
+      <div class="bm-layout">
+        <nav class="bm-tabs" id="bmTabs" aria-label="Name contenders"></nav>
+        <div id="bmNames"><sb-loading>Loading the mockups&hellip;</sb-loading></div>
+      </div>
+    </section>
+
+    
+    <section class="tab-panel" id="panel-filo">
+      <div class="panel-header">
+        <h2>Filo Sandbox <span class="count" id="filoCount"></span></h2>
+        <p class="section-hint">Last run: <span id="filoLastRun">never</span></p>
+      </div>
+      <div class="filo-about">
+        <p><b>What it is for.</b> As we automate more of the newsletter operation, the risk stops being "did someone forget" and becomes "did the automation quietly not run". Filo is the second pair of eyes on that. It exists so a broken GitHub Action or a skill that silently failed gets noticed the next morning rather than the week a sponsor asks where their report is.</p>
+        <p><b>What it does today.</b> Once a day it reads the Notion Automations List, scans the last 24 hours across Attio, Notion, Slack, beehiiv and Tally for anything that should have triggered an automation, then checks both directions: what should have fired and did not, and what fired that should not have. It posts one short table to <code>#filo-sandbox</code> with a forecast of tomorrow's expected workload, so each day's findings can be checked against yesterday's prediction.</p>
+        <p><b>What it deliberately does not do.</b> Filo never does the work itself. It does not draft, send, or mark anything complete, and it never writes to a sponsor-facing surface. It only reports. Every run is logged below.</p>
+      </div>
+      <div class="drafts-toolbar">
+        <div class="drafts-filters" id="filoFilters"></div>
+      </div>
+      <div id="filoContainer"></div>
+    </section>
+  </main>
+
+  
+  <aside class="drawer" id="skillDrawer">
+    <div class="drawer-header">
+      <div class="drawer-title-row">
+        <h3 id="drawerTitle"></h3>
+        <div class="drawer-workflow-tags" id="drawerWorkflowTags"></div>
+      </div>
+      <button class="drawer-close" id="drawerClose">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
+  
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+
+
+  <script src="/filo-loader.js"></script>
+  <script src="/campaign-stories-tab.js"></script>
+  <script src="/app.js"></script>
+  <script src="/hq-themes.js"></script>
+  <script src="/hq-shell.js"></script>
+  <script src="/scribbles.js"></script>
+  <script src="/prospect-orbit.js"></script>
+  <script src="/radar.js"></script>
+  <script src="/big3.js"></script>
+  <script src="/revenue-model.js"></script>
+  <script src="/delivery.js"></script>
+  <script src="/inventory.js"></script>
+  <script src="/newsletter-perf.js"></script>
+  <script src="/share-funnel.js"></script>
+  <script src="/lapsed.js"></script>
+  <script src="/revenue-ladder.js"></script>
+  <script src="/next-moves.js"></script>
+  <script src="/brand-guide.js"></script>
+  <script src="/brand-lockup.js"></script>
+  <script src="/brand-mockups.js"></script>
+  <script src="/thumb-zoom.js"></script>
+  <script src="/daily-timely.js"></script>
+  <script src="/daily-triage.js"></script>
+  <script src="/daily-recipe.js"></script>
+  <script src="/daily-board.js"></script>
+  <script src="/mock/editors-desk.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+/* SB Dash demo additions */
+.demo-blur { filter: blur(5px); user-select: none; -webkit-user-select: none; border-radius: 4px; }
+.demo-pill {
+  position: fixed; left: 14px; bottom: 14px; z-index: 99999; display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 12px 7px 8px; border-radius: 999px; background: #232222; color: #FFF3E6; text-decoration: none;
+  font: 600 12px/1.2 Manrope, system-ui, sans-serif; box-shadow: 0 6px 20px rgba(0,0,0,.18);
+}
+.demo-pill b { background: #FC6932; color: #fff; border-radius: 999px; padding: 3px 8px; font-weight: 800; letter-spacing: .02em; }
+.demo-toast {
+  position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 20px); opacity: 0; transition: .25s; z-index: 100000;
+  background: #232222; color: #fff; padding: 10px 16px; border-radius: 10px; font: 600 13px/1.3 Manrope, system-ui, sans-serif; pointer-events: none;
+}
+.demo-toast.on { opacity: 1; transform: translate(-50%, 0); }
+/* The demo shows every tab in the main nav: no per-person experiments section */
+.hq-exp-group { display: none !important; }
+
+/* Tabs shown only as their shape (Tom, 28 Oct 2026): blurred, unclickable, unselectable */
+#panel-newsletter > :not(.demo-blur-note), #panel-audience > :not(.demo-blur-note):not(.panel-header),
+#panel-sharefunnel > :not(.demo-blur-note), #panel-social > :not(.demo-blur-note):not(.panel-header),
+#panel-scribbles > :not(.demo-blur-note) { filter: blur(7px); pointer-events: none; user-select: none; -webkit-user-select: none; }
+.demo-blur-note { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; background: #232222; color: #FFF3E6; font: 600 13px/1.4 Manrope, system-ui, sans-serif; }
+/* Newsletter Performance: no per-send table at all */
+#panel-newsletter .sub-block:has(#nlTable) { display: none !important; }
+/* Skills: names on show, descriptions blurred */
+#panel-skills .sk-desc, #panel-skills .drawer-text { filter: blur(4px); user-select: none; }
+#panel-skills .sk-row { cursor: default; }
+/* The Editor's Desk fills the screen and its clipping pile sits bottom-left: keep the pill out of its way. */
+body:has(.ed-desk) .demo-pill { left: auto; right: 50%; transform: translateX(50%); }

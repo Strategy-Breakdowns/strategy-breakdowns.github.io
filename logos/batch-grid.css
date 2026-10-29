@@ -1,0 +1,11 @@
+/* batch grid (design/_kit/batch-grid.js) */
+.bg-host{margin-top:14px}
+.bg-nav{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px}
+.bg-nav button{border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:999px; padding:6px 12px; font:600 13px/1.2 var(--body); cursor:pointer}
+.bg-nav button span{margin-left:6px; color:var(--muted); font-weight:500}
+.bg-nav button:hover{border-color:var(--ink)}
+.bg-batch{scroll-margin-top:72px; padding-top:22px}
+.bg-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; margin-bottom:12px}
+.bg-ft{font-family:var(--display); font-weight:700; font-size:22px; color:var(--ink); margin:0}
+.bg-fs{font-size:14px; color:var(--muted)}
+.bg-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(var(--bg-card-w, 250px), 100%), 1fr)); gap:16px; align-items:start}

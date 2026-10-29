@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* sb-dash's own tokens and fonts (17 Oct 2026). Inside sb-dash the page copies the
+     parent's colour variables, so it follows whatever theme the viewer picked. */
+  :root{
+    --bg:#FFFAF3; --bg-card:#FFFFFF; --bg-hover:#FBF4E8; --text:#232222; --text-muted:#6B6660; --text-dim:#9A9184;
+    --border:#E6E3DD; --accent:#FC6932; --li:#0A66C2; --x:#111111; --good:#12795A;
+    --head:'Hanken Grotesk',sans-serif; --body:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  body.embed{padding:4px 2px 40px; background:transparent}
+  body.embed > h1, body.embed > .sub{display:none}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);padding:34px 30px 70px;font:14px/1.5 var(--body);font-variant-numeric:tabular-nums}
+  a{color:inherit}
+  h1{font:700 24px var(--head);margin:0 0 4px}
+  .sub{color:var(--text-muted);margin:0 0 20px;font-size:13.5px;max-width:720px}
+  h2.sec{font:700 15px var(--head);margin:28px 0 12px;display:flex;align-items:baseline;gap:9px}
+  h2.sec span{font:500 12.5px var(--body);color:var(--text-muted)}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .pills{display:flex;gap:6px;flex-wrap:wrap}
+  .pill{border:1px solid var(--border);background:var(--bg-card);color:var(--text-muted);border-radius:999px;padding:6px 12px;font:600 12px var(--body);cursor:pointer}
+  .pill.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px}
+  .strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0 0 14px}
+  .kpi{padding:14px 16px}
+  .kpi .l{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+  .kpi .n{font:700 22px var(--head);margin-top:6px}
+  .kpi .s{font-size:11.5px;color:var(--text-dim);margin-top:2px}
+  .insights{padding:4px 18px;margin-bottom:14px}
+  .ins{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+  .ins:last-child{border-bottom:none}
+  .ins .ic{font-size:15px;line-height:1.4}
+  .ins .tx{font-size:13.5px} .ins .tx b{color:var(--text)} .ins .tx .dim{color:var(--text-muted)}
+  .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .chart-card{padding:16px 18px}
+  .chart-card.wide{grid-column:1 / -1}
+  .chart-card h3{font:700 14px var(--head);margin:0 0 2px}
+  .chart-note{font-size:12px;color:var(--text-muted);margin:0 0 14px}
+  .bc-row{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:10px;margin-bottom:9px}
+  .bc-label{font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bc-track{height:12px;background:var(--bg-hover);border-radius:4px;overflow:hidden}
+  .bc-fill{height:100%;border-radius:0 4px 4px 0;background:var(--accent)}
+  .bc-val{font:700 12.5px var(--head);min-width:56px;text-align:right}
+  .bc-val .bc-sub{display:block;font:400 10.5px var(--body);color:var(--text-dim)}
+  .winner{padding:16px 20px;border-left:3px solid var(--accent)}
+  .wtag{font:700 11px var(--body);color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  .wname{font:700 18px var(--head)} .wmeta{font-size:12.5px;color:var(--text-muted)}
+  .wstats{display:flex;gap:20px;flex-wrap:wrap;align-items:baseline;margin-top:8px;font-size:12.5px;color:var(--text-muted)}
+  .wstats b{font:700 16px var(--head);color:var(--text);margin-right:3px}
+  .wlink{margin-left:auto;font-weight:600;text-decoration:none;color:var(--accent)}
+  .tbl-wrap{overflow-x:auto}
+  .tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:760px}
+  .tbl th,.tbl td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+  .tbl thead th{font:600 10.5px var(--body);color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;cursor:pointer;user-select:none}
+  .tbl thead th.on{color:var(--text)}
+  .tbl .col-post,.tbl .day{text-align:left}
+  .tbl td.col-post{max-width:300px;white-space:normal}
+  .tbl tbody tr:hover{background:var(--bg-hover)}
+  .day{color:var(--text-muted)}
+  .pname{font-weight:600}
+  .tag{display:inline-block;font:600 10px var(--body);padding:2px 7px;border-radius:999px;background:var(--bg-hover);color:var(--text-muted);margin-left:6px}
+  .plinks a{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;color:#fff;font-size:9px;font-weight:800;margin:3px 4px 0 0;text-decoration:none}
+  .plinks a.li{background:var(--li)} .plinks a.x{background:var(--x)}
+  .nm{color:var(--text-dim)}
+  .foot-note{color:var(--text-dim);font-size:12px;margin-top:18px;line-height:1.6}
+  .empty-state{padding:34px;text-align:center;color:var(--text-muted);border-style:dashed}
+  @media (max-width:900px){ .strip{grid-template-columns:repeat(2,1fr)} .charts{grid-template-columns:1fr} .bc-row{grid-template-columns:100px 1fr auto} }
+</style>
+</head>
+<body>
+  <h1>Social Performance</h1>
+  <p class="sub">Tom's posts on LinkedIn and X: Eden's daily pull plus the posts measured by hand in the
+    <a href="https://demo.invalid/" target="_blank" rel="noopener">Posts DB</a>.</p>
+  <div id="content"></div>
+  <p class="foot-note" id="note"></p>
+<script>
+(function(){
+  const embedded = new URLSearchParams(location.search).get("embed") !== null;
+  if(embedded) document.body.classList.add("embed");
+  // Copy sb-dash's colour variables, so this page follows the viewer's theme.
+  const VARS = ["--bg","--bg-card","--bg-hover","--text","--text-muted","--text-dim","--border","--accent"];
+  function syncTheme(){
+    try{
+      if(window.parent === window) return;
+      const cs = window.parent.getComputedStyle(window.parent.document.documentElement);
+      for(const v of VARS){ const val = cs.getPropertyValue(v).trim(); if(val) document.documentElement.style.setProperty(v, val); }
+      const light = window.parent.document.documentElement.getAttribute("data-theme") === "light";
+      // Match the parent's color-scheme, or the browser paints an opaque white
+      // backdrop behind this transparent frame in dark mode.
+      document.documentElement.style.colorScheme = light ? "light" : "dark";
+      document.documentElement.style.setProperty("--li", light ? "#0A66C2" : "#4A9EFF");
+      document.documentElement.style.setProperty("--good", light ? "#12795A" : "#4ADE80");
+    }catch(e){}
+  }
+  syncTheme();
+  try{ if(window.parent !== window){
+    new MutationObserver(syncTheme).observe(window.parent.document.documentElement, {attributes:true, attributeFilter:["data-theme","style"]});
+  }}catch(e){}
+})();
+
+const n = v => (v === null || v === undefined) ? "-" : Math.round(v).toLocaleString("en-GB");
+const esc = s => String(s || "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const avg = a => a.length ? a.reduce((s,v)=>s+v,0)/a.length : 0;
+const sum = a => a.reduce((s,v)=>s+(v||0),0);
+// Engagements are the comparable number: likes + comments + reposts (+ saves on X)
+// exist for every post. LinkedIn impressions only exist where someone measured them
+// by hand in Notion, because LinkedIn shows them to the author only and Eden can't.
+const eng = m => m ? (m.socialEng != null ? m.socialEng : (m.likes||0)+(m.comments||0)+(m.reposts||0)+(m.saves||0)) : null;
+const totalEng = p => (eng(p.li)||0) + (eng(p.x)||0);
+
+const RANGES = [[30,"Last 30 days"],[90,"Last 90 days"],[182,"6 months"],[365,"12 months"],[0,"All"]];
+const S = { all: [], days: 90, sort: { key: "date", dir: -1 } };
+try { S.days = +(localStorage.getItem("social:days") || 90); } catch(e) {}
+
+function inRange(){
+  if(!S.days) return S.all;
+  const cut = new Date(Date.now() - S.days*86400000).toISOString().slice(0,10);
+  return S.all.filter(p => p.date >= cut);
+}
+
+// ---------- What's working ----------
+function barChart(title, note, items, wide){
+  const max = Math.max(1, ...items.map(i=>i.value));
+  const rows = items.map(i=>`<div class="bc-row"><div class="bc-label" title="${esc(i.label)}">${esc(i.label)}</div>
+    <div class="bc-track"><div class="bc-fill" style="width:${Math.max(2,(i.value/max*100)).toFixed(1)}%"></div></div>
+    <div class="bc-val">${n(i.value)}${i.sub?`<span class="bc-sub">${esc(i.sub)}</span>`:""}</div></div>`).join("");
+  return `<div class="card chart-card${wide?" wide":""}"><h3>${esc(title)}</h3><p class="chart-note">${esc(note)}</p>${rows || '<p class="chart-note">Nothing in this range.</p>'}</div>`;
+}
+function whatsWorking(posts){
+  const li = posts.filter(p=>p.li), x = posts.filter(p=>p.x);
+  const liMeasured = li.filter(p=>p.li.impressions != null);
+  const kpis = [
+    ["Posts", n(posts.length), `${li.length} LinkedIn · ${x.length} X`],
+    ["LinkedIn engagements", n(sum(li.map(p=>eng(p.li)))), `avg ${n(avg(li.map(p=>eng(p.li))))} per post`],
+    ["X impressions", n(sum(x.map(p=>p.x.impressions))), `avg ${n(avg(x.map(p=>p.x.impressions||0)))} per post`],
+    ["LinkedIn impressions", liMeasured.length ? n(sum(liMeasured.map(p=>p.li.impressions))) : "-", `${liMeasured.length} of ${li.length} posts measured`],
+    ["Followers gained", n(sum(li.map(p=>p.li.followers))), "LinkedIn, where measured"],
+  ];
+  const strip = `<div class="strip">${kpis.map(([l,v,s])=>`<div class="card kpi"><div class="l">${l}</div><div class="n">${v}</div><div class="s">${s}</div></div>`).join("")}</div>`;
+
+  const ins = [];
+  const topLi = [...li].sort((a,b)=>eng(b.li)-eng(a.li));
+  if(topLi[0]) ins.push(["🏆", `Top LinkedIn post: <b>${esc(topLi[0].name)}</b> <span class="dim">· ${n(eng(topLi[0].li))} engagements, ${topLi[1] ? `${(eng(topLi[0].li)/Math.max(1,avg(li.map(p=>eng(p.li))))).toFixed(1)}x the average` : ""}.</span>`]);
+  const fmt = {}; li.forEach(p=>{ if(p.format) (fmt[p.format]=fmt[p.format]||[]).push(eng(p.li)); });
+  const fmtRank = Object.entries(fmt).filter(([,a])=>a.length>=2).map(([f,a])=>[f,avg(a),a.length]).sort((a,b)=>b[1]-a[1]);
+  if(fmtRank.length>=2) ins.push(["🧩", `<b>${esc(fmtRank[0][0])}</b> is the best format: <b>${n(fmtRank[0][1])}</b> avg engagements <span class="dim">vs ${n(fmtRank[fmtRank.length-1][1])} for ${esc(fmtRank[fmtRank.length-1][0])}.</span>`]);
+  const spon = li.filter(p=>p.type==="Sponsored"), org = li.filter(p=>p.type!=="Sponsored");
+  if(spon.length && org.length) ins.push(["🤝", `Sponsored LinkedIn posts average <b>${n(avg(spon.map(p=>eng(p.li))))}</b> engagements <span class="dim">vs ${n(avg(org.map(p=>eng(p.li))))} for organic (${spon.length} vs ${org.length} posts).</span>`]);
+  const comments = li.map(p=>p.li.comments||0), likes = li.map(p=>p.li.likes||0);
+  if(li.length) ins.push(["💬", `Comments are <b>${Math.round(sum(comments)/Math.max(1,sum(likes))*100)}%</b> of likes on LinkedIn <span class="dim">: a rough read on how much posts start conversations.</span>`]);
+  const topX = [...x].sort((a,b)=>(b.x.impressions||0)-(a.x.impressions||0))[0];
+  if(topX && topX.x.impressions) ins.push(["𝕏", `Top X post: <b>${esc(topX.name)}</b> <span class="dim">· ${n(topX.x.impressions)} impressions.</span>`]);
+  const insHtml = ins.length ? `<div class="card insights">${ins.map(([ic,tx])=>`<div class="ins"><span class="ic">${ic}</span><span class="tx">${tx}</span></div>`).join("")}</div>` : "";
+
+  const typeItems = fmtRank.map(([f,v,c])=>({label:f, value:v, sub:`${c} posts`}));
+  const topItems = topLi.slice(0,8).map(p=>({label:p.name, value:eng(p.li), sub:p.dateLabel}));
+  let chartsHtml = `<div class="charts">`;
+  chartsHtml += barChart("Top LinkedIn posts", "Engagements: likes + comments + reposts.", topItems, !typeItems.length);
+  if(typeItems.length) chartsHtml += barChart("Best formats", "Average engagements per LinkedIn post, formats with 2+ posts.", typeItems);
+  chartsHtml += `</div>`;
+  return `<h2 class="sec">What's working <span>in the selected range</span></h2>${strip}${insHtml}${chartsHtml}`;
+}
+
+// ---------- Every post (sortable) ----------
+const COLS = [
+  ["date","Day", p=>esc(p.dateLabel), p=>p.date, "day"],
+  ["name","Post", p=>`<span class="pname">${esc(p.name)}</span>${p.type==="Sponsored"?'<span class="tag">Sponsored</span>':""}${p.format?`<span class="tag">${esc(p.format)}</span>`:""}<span class="plinks">${p.li&&p.li.url?`<a class="li" href="${esc(p.li.url)}" target="_blank" rel="noopener">in</a>`:""}${p.x&&p.x.url?`<a class="x" href="${esc(p.x.url)}" target="_blank" rel="noopener">𝕏</a>`:""}</span>`, p=>p.name, "col-post"],
+  ["eng","Engagements", p=>`<b>${n(totalEng(p))}</b>`, p=>totalEng(p)],
+  ["liLikes","LI Likes", p=>n(p.li&&p.li.likes), p=>p.li&&p.li.likes],
+  ["liComments","LI Comments", p=>n(p.li&&p.li.comments), p=>p.li&&p.li.comments],
+  ["liReposts","LI Reposts", p=>n(p.li&&p.li.reposts), p=>p.li&&p.li.reposts],
+  ["liImp","LI Impressions", p=>p.li ? (p.li.impressions!=null ? n(p.li.impressions) : '<span class="nm" title="LinkedIn only shows impressions to the author; not measured by hand yet">not measured</span>') : "-", p=>p.li&&p.li.impressions],
+  ["xImp","𝕏 Impressions", p=>n(p.x&&p.x.impressions), p=>p.x&&p.x.impressions],
+  ["xLikes","𝕏 Likes", p=>n(p.x&&p.x.likes), p=>p.x&&p.x.likes],
+  ["fol","Followers", p=>n(p.li&&p.li.followers), p=>p.li&&p.li.followers],
+];
+function table(posts){
+  const col = COLS.find(c=>c[0]===S.sort.key) || COLS[0];
+  const v = p => { const x = col[3](p); return x == null ? -Infinity : x; };
+  const rows = [...posts].sort((a,b)=>{ const x=v(a), y=v(b); return (typeof x==="string" ? x.localeCompare(y) : x-y) * S.sort.dir; });
+  return `<h2 class="sec">Every post <span>${posts.length} in range · click a column to sort</span></h2>
+    <div class="card tbl-wrap"><table class="tbl"><thead><tr>${COLS.map(c=>`<th data-k="${c[0]}" class="${c[4]||""}${c[0]===S.sort.key?" on":""}">${c[1]}${c[0]===S.sort.key?(S.sort.dir<0?" ↓":" ↑"):""}</th>`).join("")}</tr></thead>
+    <tbody>${rows.map(p=>`<tr>${COLS.map(c=>`<td class="${c[4]||""}">${c[2](p)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+}
+
+function render(){
+  const el = document.getElementById("content");
+  const posts = inRange();
+  const bar = `<div class="bar"><div class="pills">${RANGES.map(([d,l])=>`<button class="pill${d===S.days?" on":""}" data-d="${d}">${l}</button>`).join("")}</div></div>`;
+  if(!posts.length){ el.innerHTML = bar + `<div class="card empty-state">No posts in this range.</div>`; wire(); return; }
+  el.innerHTML = bar + whatsWorking(posts) + table(posts);
+  wire();
+}
+function wire(){
+  document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ S.days=+b.dataset.d; try{localStorage.setItem("social:days",S.days);}catch(e){} render(); });
+  document.querySelectorAll(".tbl th[data-k]").forEach(th=>th.onclick=()=>{ const k=th.dataset.k; S.sort = S.sort.key===k ? {key:k, dir:-S.sort.dir} : {key:k, dir: k==="name" ? 1 : -1}; render(); });
+}
+
+async function load(){
+  try{
+    const r = await fetch("data.json", {cache:"no-store"});
+    if(!r.ok) throw new Error("live data unavailable");
+    const j = await r.json();
+    S.all = j.posts || [];
+    render();
+    const parts = [];
+    if(j.generatedAt) parts.push("Updated " + new Date(j.generatedAt).toLocaleString("en-GB",{hour:"2-digit",minute:"2-digit",day:"numeric",month:"short"}));
+    if(j.eden && j.eden.generated) parts.push("Eden last pulled " + new Date(j.eden.generated).toLocaleString("en-GB",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}));
+    parts.push("LinkedIn impressions are only shown to the author, so Eden can't pull them: they appear where someone has entered them in the Posts DB. Engagements are used to compare posts instead.");
+    document.getElementById("note").textContent = parts.join(" · ");
+  }catch(e){
+    document.getElementById("content").innerHTML = `<div class="card empty-state">Couldn't load live data (${esc(e.message)}).</div>`;
+  }
+}
+load();
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) load(); });
+</script>
+</body>
+</html>
