@@ -4,10 +4,10 @@
 // sources, subject lines, preview texts, poll ideas, why it's timely. This is phase 1 of the desk
 // (Tom, 29 Oct 2026): "the desk fills with clippings (charts, angles, sources, stats). We move
 // them around, and pin what matters (so the briefings get better each time)". Pins are what the
-// research desk learns from. Phases 2-4 (James pass, Tom pass, Ready to slot) happen in the
-// Notion edition (Tom, 29 Oct 2026): here that is a mock Notion page inside the demo, holding
-// everything filed under Use it and Maybe. It never links to the real Notion. Clippings flow in
-// from 3 feeds, the call transcript, Slack and the research desk, all made up.
+// research desk learns from. Then the writing moves to the Notion edition, which already holds
+// everything filed under Use it and Maybe; in this demo the Notion button only says so in a toast
+// (Tom, 29 Oct 2026), it never opens Notion. Clippings flow in from 3 feeds, the call transcript,
+// Slack and the research desk, all made up.
 // The desk runs along a "This <-> Not this" line (Tom's moodboard, 28 Oct 2026): clippings
 // come in on the left, get dealt 1 click at a time, and wherever you drop one files it under
 // Use it, Maybe or Cut. Everything in "Use it" shows up on the page as plain text to copy,
@@ -29,8 +29,8 @@
     { id: 'maybe', label: 'Maybe', hint: '' },
     { id: 'cut', label: 'Cut', hint: 'Not this' },
   ];
-  const S = { el: null, cards: [], idx: 0, open: false, z: 10, comments: {}, phase: 1 };
-  const NOTION_LOGO = '<svg class="nb-logo" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="#fff" stroke="#111" stroke-width="1.6"/><path d="M8 17V7.5l7.6 9.5V7" fill="none" stroke="#111" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  const S = { el: null, cards: [], idx: 0, open: false, z: 10, comments: {} };
+  const NOTION_LOGO = '<svg class="nb-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>';
 
 
   async function load() {
@@ -60,7 +60,22 @@
       [`${10 + Math.floor(rr() * 60)}%`, `of ${c.company}'s revenue rides on it`],
       [`$${(0.2 + rr() * 4).toFixed(1)}B`, 'spent getting here'],
       [`${2 + Math.floor(rr() * 9)} yrs`, 'since anyone asked'],
+      [`${(20 + rr() * 70).toFixed(0)}k`, `${c.company} staff affected`],
+      [`#${1 + Math.floor(rr() * 5)}`, 'in its category now'],
+      [`${(0.5 + rr() * 9).toFixed(1)}%`, 'of the market, up from 0.2%'],
     ];
+    // Mini charts drawn on the clipping, all made-up numbers.
+    const pts = Array.from({ length: 8 }, (_, i) => 18 + i * 6 + rr() * 14 + (i > 5 ? 18 : 0));
+    const spark = (() => { const max = Math.max(...pts), path = pts.map((v, i) => `${i ? 'L' : 'M'}${8 + i * 26},${78 - (v / max) * 62}`).join(' ');
+      return `<svg viewBox="0 0 200 90" class="ed-viz-svg"><path d="${path}" fill="none" stroke="#FC6932" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${pts.map((v, i) => i === 7 ? `<circle cx="${8 + i * 26}" cy="${78 - (v / max) * 62}" r="5" fill="#FC6932"/>` : '').join('')}<line x1="4" y1="84" x2="196" y2="84" stroke="#cfc6b8"/></svg>`; })();
+    const barsV = ['Eng', 'Sales', 'Ops', 'Legal', 'Pods'].map((l, i) => [l, i === 4 ? 92 : 25 + rr() * 50]);
+    const bars = `<svg viewBox="0 0 200 96" class="ed-viz-svg">${barsV.map(([l, v], i) => `<rect x="${10 + i * 38}" y="${80 - v * 0.7}" width="26" height="${v * 0.7}" rx="2" fill="${i === 4 ? '#FC6932' : '#d9cfbf'}"/><text x="${23 + i * 38}" y="93" font-size="9" text-anchor="middle" fill="#7a7065">${l}</text>`).join('')}</svg>`;
+    const share = 30 + Math.floor(rr() * 50), a = share / 100 * 2 * Math.PI;
+    const donut = `<svg viewBox="0 0 120 120" class="ed-viz-svg ed-donut"><circle cx="60" cy="60" r="42" fill="none" stroke="#e8e0d3" stroke-width="18"/><path d="M60 18 A42 42 0 ${share > 50 ? 1 : 0} 1 ${60 + 42 * Math.sin(a)} ${60 - 42 * Math.cos(a)}" fill="none" stroke="#7b5cf0" stroke-width="18"/><text x="60" y="66" font-size="20" font-weight="700" text-anchor="middle" fill="#232222">${share}%</text></svg>`;
+    const viz = (id, title, svg, note) => ({ id, kind: 'viz', w: 210, text: `${title}: ${note}`, html: `<div class="ed-viz-h">${esc(title)}</div>${svg}<div class="ed-viz-n">${esc(note)}</div>` });
+    const vizLine = viz('viz0', `${c.company}, last 8 quarters`, spark, 'The kink is in the last 2 quarters');
+    const vizBars = viz('viz1', 'Where the spend goes', bars, `${c.company}'s odd one out, by team`);
+    const vizDonut = viz('viz2', 'Share of the category', donut, `${c.company}'s slice, made-up survey`);
     const quotes = [
       [`We didn't set out to do this. It just kept working.`, `a ${c.company} exec, Q3 call`],
       [`Everyone is looking at the headline number. Look at the 2nd chart.`, `an analyst at ${pub}`],
@@ -82,6 +97,7 @@
     const rel = (o, i) => ({ id: 'related' + i, kind: 'photo sm', w: 170, text: `Related chart: ${o.name}`, html: `<span class="ed-tape"></span><img src="${esc(o.image)}" alt="" draggable="false"><div class="ed-caption">Related: ${esc(o.company || o.name)}</div>` });
     if (n) push(stat(0, n, 'the number that stops you'));
     push(transcript);
+    push(vizLine);
     push(angle(0));
     push(quote(0));
     if (related[0]) push(rel(related[0], 0));
@@ -89,17 +105,22 @@
     push(angle(1));
     if (subjects.length) push({ id: 'subjects', kind: 'index', w: 230, text: 'Subject lines:\n' + subjects.map(s => '- ' + s).join('\n'), html: `<div class="ed-index-h">Subject lines</div>${subjects.map(s => `<div class="ed-index-li">${esc(s)}</div>`).join('')}` });
     push(slack);
+    push(stat(5, ...stats[4]));
     push(quote(1));
+    push(vizBars);
     push(stat(2, ...stats[1]));
     push(angle(2));
     push({ id: 'sources', kind: 'index src', w: 230, text: `Sources:\n- ${pub}\n- ${c.company} Q3 shareholder letter\n- ${c.company} careers page, archived`, html: `<div class="ed-index-h">Sources (all made up)</div><div class="ed-index-li">${esc(pub)}</div><div class="ed-index-li">${esc(c.company)} Q3 shareholder letter</div><div class="ed-index-li">${esc(c.company)} careers page, archived</div>` });
     if (related[1]) push(rel(related[1], 1));
     push(quote(2));
+    push(vizDonut);
     push(stat(3, ...stats[2]));
+    push(stat(6, ...stats[5]));
     push({ id: 'preview', kind: 'stub', w: 230, text: 'Preview text:\n' + previews.map(s => '- ' + s).join('\n'), html: `<div class="ed-stub-h">Preview text</div>${previews.map(s => `<div class="ed-stub-li">${esc(s)}</div>`).join('')}` });
     push({ id: 'polls', kind: 'sticky blue', w: 200, text: 'Poll ideas:\n' + polls.map(s => '- ' + s).join('\n'), html: `<div class="ed-hand-h">Poll ideas</div>${polls.map(s => `<div class="ed-hand sm">${esc(s)}</div>`).join('')}` });
     push(quote(3));
     push(stat(4, ...stats[3]));
+    push(stat(7, ...stats[6]));
     if (c.timelyWhy) push({ id: 'why', kind: 'sticky', w: 180, text: `Why now: ${c.timelyWhy}`, html: `<div class="ed-hand-h">Why now?</div><div class="ed-hand">${esc(c.timelyWhy)}</div>` });
     if (v.share?.[0]) { const who = String(v.share[0]).replace(/^Send to someone who \[?|\]$/g, ''); push({ id: 'share', kind: 'sticky pink', w: 180, text: `Who'd forward it: ${who}`, html: `<div class="ed-hand-h">Who'd forward it?</div><div class="ed-hand">${esc(who)}</div>` }); }
     notes.slice(0, 2).forEach((m, i) => push({ id: 'note' + i, kind: 'margin ' + (m.author === 'Tom' ? 'tom' : 'james'), w: 200, text: `${m.author}: ${m.text}`, html: `<div class="ed-hand">${esc(m.text)}</div><div class="ed-sig">- ${esc(m.author)}</div>` }));
@@ -165,7 +186,6 @@
     renderPage();
     words();
     pins();
-    renderNotion();
     (S.justDealt || []).forEach(id => {
       const el = desk.querySelector(`.ed-clip[data-id="${id}"]`), cl = S.clips.find(x => x.id === id);
       const src = cl && desk.querySelector(`.ed-feed[data-feed="${cl.from}"]`);
@@ -175,67 +195,8 @@
     });
     S.justDealt = [];
   }
-  // Phase 1 is sorting only, so the page stays folded away and the desk gets the full width.
-  function setPhase(n) {
-    S.phase = n;
-    applyPhase();
-    render();
-    S.el.querySelector('.ed-notion')?.scrollTo({ top: 0 });
-  }
-  function applyPhase() {
-    const main = S.el.querySelector('.ed-main');
-    main.classList.toggle('phase1', S.phase === 1);
-    main.classList.toggle('in-notion', S.phase > 1);
-    S.el.querySelectorAll('.ed-phases i').forEach(i => i.classList.toggle('on', +i.dataset.phase === S.phase));
-    S.el.querySelector('.ed-tonotion').hidden = S.phase !== 1;
-    S.el.querySelector('.ed-padbtn').hidden = S.phase !== 1;
-    S.el.querySelector('.ed-tidy').hidden = S.phase !== 1;
-  }
-
-  // The Notion edition, mocked inside the demo: nothing here reaches the real Notion.
-  const STAGE = { 2: { status: 'James pass', who: 'James', tag: 'purple', next: 'Hand to Tom', nextPhase: 3, banner: 'James writes the first pass from the clippings below.' },
-    3: { status: 'Tom pass', who: 'Tom', tag: 'orange', next: 'Mark ready to slot', nextPhase: 4, banner: 'Tom edits James\'s pass: tighter headline, sharper first line.' },
-    4: { status: 'Ready to slot', who: 'Tom', tag: 'green', next: 'See it on Publishing', nextPhase: 0, banner: 'Done. It waits on the Publishing tab for a send day.' } };
-  function block(cl) {
-    const pin = S.st.pin[cl.id] ? '<span class="nb-pin" title="Pinned on the desk">📌</span>' : '';
-    if (/^(chart|related)/.test(cl.id)) { const src = (cl.html.match(/<img src="([^"]+)"/) || [])[1]; return `<figure class="nb-img">${pin}<img src="${src}" alt=""><figcaption>${esc(cl.text)}</figcaption></figure>`; }
-    if (/^stat/.test(cl.id)) return `<div class="nb-callout">${pin}<span>📊</span><div>${esc(cl.text.replace(/^Stat: /, ''))}</div></div>`;
-    if (/^quote/.test(cl.id)) return `<blockquote class="nb-quote">${pin}${esc(cl.text)}</blockquote>`;
-    return `<div class="nb-p">${pin}${esc(cl.text).replace(/\n/g, '<br>')}</div>`;
-  }
-  function renderNotion() {
-    const box = S.el.querySelector('.ed-notion'); if (!box || S.phase === 1) return;
-    const c = S.cards[S.idx], st = S.st, g = STAGE[S.phase], dealt = S.clips.slice(0, st.dealt);
-    const use = dealt.filter(cl => st.zone[cl.id] === 'use'), maybe = dealt.filter(cl => st.zone[cl.id] === 'maybe');
-    st.notion ||= {};
-    const draft = st.notion.draft || '';
-    box.innerHTML = `
-      <div class="nb-bar">${NOTION_LOGO}<span class="nb-crumb">Strategy Breakdowns / Filo's Factory / ${esc(c.name.slice(0, 48))}</span><span class="nb-demo">Demo copy: nothing here touches our real Notion</span></div>
-      <div class="nb-page">
-        <div class="nb-icon">📊</div>
-        <h1 class="nb-title">${esc(c.name)}</h1>
-        <div class="nb-props">
-          <div><span>Status</span><b class="nb-tag nb-${g.tag}">${g.status}</b></div>
-          <div><span>Owner</span><b>${g.who}</b></div>
-          <div><span>Company</span><b>${esc(c.company || '')}</b></div>
-          <div><span>Publish by</span><b>${esc(c.publishBy || 'Evergreen')}</b></div>
-          <div><span>From the desk</span><b>${use.length} use it · ${maybe.length} maybe · ${dealt.filter(cl => st.pin[cl.id]).length} pinned</b></div>
-        </div>
-        <div class="nb-banner">${g.banner}</div>
-        <h2>Draft</h2>
-        <div class="nb-draft" contenteditable="${S.phase === 4 ? 'false' : 'true'}" data-ph="${S.phase === 2 ? 'James writes the first pass here. Every word is human.' : 'Tom edits here.'}">${esc(draft)}</div>
-        <h2>From the Editor's Desk <small>filed under Use it, in here automatically</small></h2>
-        ${use.length ? use.map(block).join('') : '<div class="nb-empty">Nothing filed under Use it yet. Go back to the desk and drag a few clippings across.</div>'}
-        <details class="nb-toggle"${maybe.length ? '' : ' hidden'}><summary>Maybe <span>${maybe.length}</span></summary>${maybe.map(block).join('')}</details>
-        <div class="nb-actions"><button class="nb-back">← Back to the desk</button><button class="nb-next">${g.next} →</button></div>
-      </div>`;
-    box.querySelector('.nb-draft').addEventListener('input', e => { st.notion.draft = e.target.innerText; save(); });
-    box.querySelector('.nb-back').addEventListener('click', () => setPhase(1));
-    box.querySelector('.nb-next').addEventListener('click', () => {
-      if (g.nextPhase) { setPhase(g.nextPhase); window.demoToast?.(g.nextPhase === 3 ? 'Handed to Tom.' : 'Ready to slot.'); return; }
-      close(); window.dispatchEvent(new Event('dailydeck:closed')); window.navTo?.('dailypublishing');
-    });
-  }
+  // Phase 1 is sorting only, so the page stays folded away until the Scratchpad is asked for.
+  function applyPhase() { S.el.querySelector('.ed-main').classList.add('phase1'); }
   function pins() {
     const n = S.clips.slice(0, S.st.dealt).filter(cl => S.st.pin[cl.id]).length;
     S.el.querySelector('.ed-pincount').innerHTML = n
@@ -299,7 +260,7 @@
       drag.clip.classList.remove('is-lifted');
       desk.querySelectorAll('.ed-lane').forEach(l => l.classList.remove('is-target'));
       drag = null; save();
-      if (was !== now) { render(); if (now === 'use') window.demoToast?.('Filed under Use it. It goes into the Notion edition for James\'s pass.'); }
+      if (was !== now) { render(); if (now === 'use') window.demoToast?.('Filed under Use it. It goes into the Notion edition.'); }
     };
     desk.addEventListener('pointerup', end);
     desk.addEventListener('pointercancel', end);
@@ -326,9 +287,9 @@
     });
     S.el.querySelector('.ed-copyall').addEventListener('click', () => copy(S.clips.slice(0, S.st.dealt).filter(cl => S.st.zone[cl.id] === 'use').map(cl => cl.text).join('\n\n')));
     S.el.querySelector('.ed-body').addEventListener('input', e => { S.st.draft.body = e.target.innerText; save(); words(); });
-    S.el.querySelector('.ed-tonotion').addEventListener('click', () => setPhase(2));
+    // The real button opens the edition in Notion with every Use it and Maybe clipping in it. The demo only says so.
+    S.el.querySelector('.ed-tonotion').addEventListener('click', () => window.demoToast?.('This opens the edition in Notion, with every Use it and Maybe clipping already in it. Switched off in the demo.'));
     S.el.querySelector('.ed-padbtn').addEventListener('click', () => S.el.querySelector('.ed-main').classList.toggle('show-pad'));
-    S.el.querySelectorAll('.ed-phases i').forEach(i => i.addEventListener('click', () => setPhase(+i.dataset.phase)));
     S.el.querySelector('.ed-which').addEventListener('change', e => { S.idx = +e.target.value; render(); });
     S.el.querySelector('.ed-prev').addEventListener('click', () => { S.idx = (S.idx - 1 + S.cards.length) % S.cards.length; render(); });
     S.el.querySelector('.ed-next').addEventListener('click', () => { S.idx = (S.idx + 1) % S.cards.length; render(); });
@@ -350,14 +311,14 @@
     S.el.className = 'ed-overlay';
     S.el.innerHTML = `
       <header class="ed-top">
-        <div class="ed-title"><b>The Editor's Desk</b><span class="ed-phases"><i data-phase="1">1 Sort the clippings</i><i data-phase="2" class="ed-ph-notion">${NOTION_LOGO}2 James pass</i><i data-phase="3">3 Tom pass</i><i data-phase="4">4 Ready to slot</i></span><span class="ed-pincount"></span></div>
+        <div class="ed-title"><b>The Editor's Desk</b><span class="ed-pincount"></span></div>
         <div class="ed-nav">
           <button class="ed-prev" title="Previous desk">‹</button>
           <select class="ed-which" aria-label="Desk"></select>
           <button class="ed-next" title="Next desk">›</button>
         </div>
         <div class="ed-tools">
-          <button class="ed-tonotion" title="Open the Notion edition for James's pass">${NOTION_LOGO}<span>Open in Notion: James pass</span></button>
+          <button class="ed-tonotion" title="Open this edition in Notion">${NOTION_LOGO}<span>Open in Notion</span></button>
           <button class="ed-padbtn" title="Notes to self">Scratchpad</button>
           <button class="ed-tidy" title="Stack each column neatly">Tidy</button>
           <button class="ed-reset" title="Put every clipping back in the pile">Start over</button>
@@ -373,7 +334,6 @@
           <div class="ed-pad-h">Scratchpad</div>
           <div class="ed-body" contenteditable="true"></div>
         </aside>
-        <section class="ed-notion" aria-label="Notion edition (demo copy)"></section>
       </div>`;
     document.body.appendChild(S.el);
     bind();
